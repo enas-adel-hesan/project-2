@@ -23,21 +23,22 @@ class TeacherAuthController extends Controller
         $validatedData['password'] = Hash::make($request->password);
 
         $teacher = Teacher::create($validatedData);
+        $token = $teacher->createToken('teacher-token')->plainTextToken;
 
-        return response()->json(['teacher' => $teacher], 200);
+        return response()->json(['teacher' => $teacher,'token'=>$token], 200);
     }
 
 
     public function login(Request $request)
     {
-        
+
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
         ]);
 
         $teacher = Teacher::where('email', $request->email)->first();
-     
+
         if (!$teacher || !Hash::check($request->password, $teacher->password)) {
             throw ValidationException::withMessages([
                 'email' => ['The provided credentials are incorrect.'],
