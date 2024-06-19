@@ -101,6 +101,26 @@ public function page(Request $r)
 
         return response()->json(['token' => $token], 200);;
     }
+
+
+    public function update(Request $request, $id)
+    {
+        $teacher = teacher::findOrFail($id);
+
+        $validatedData = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:teachers,email,' . $id,
+             'specialization'=>'required|string|max:255'
+            // Exclude password validation and hashing
+        ]);
+
+        // Update the student with the validated data, excluding the password
+        $teacher->update($validatedData);
+
+        return response()->json(['message' => 'teacher account updated successfully!', 'student' => $teacher], 200);
+    }
+
     
     public function index()
     {

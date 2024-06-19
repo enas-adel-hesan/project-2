@@ -100,6 +100,24 @@ class StudentAuthController extends Controller
         return response()->json(['token' => $token], 200);;
     }
 
+    public function update(Request $request, $id)
+    {
+        $student = Student::findOrFail($id);
+
+        $validatedData = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:students,email,' . $id,
+            // Exclude password validation and hashing
+        ]);
+
+        // Update the student with the validated data, excluding the password
+        $student->update($validatedData);
+
+        return response()->json(['message' => 'Student account updated successfully!', 'student' => $student], 200);
+    }
+
+
    
      
     public function index()
