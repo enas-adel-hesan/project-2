@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Teacher;
+use App\Models\teacher_wallets;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
@@ -76,8 +77,10 @@ public function page(Request $r)
 
         $teacher = Teacher::create($validatedData);
         $token = $teacher->createToken('teacher-token')->plainTextToken;
-
-        return response()->json(['teacher' => $teacher,'token'=>$token], 200);
+        $teacherWallet = new teacher_wallets(); // Assuming you have a Wallet model
+        $teacherWallet ->value = 0; // Initialize the wallet amount (optional)
+        $teacher->teacher_wallets()->save($teacherWallet);
+        return response()->json(['teacher' => $teacher,'teacherWallet' => $teacherWallet,'token'=>$token], 200);
     }
 
 
@@ -118,7 +121,7 @@ public function page(Request $r)
         // Update the student with the validated data, excluding the password
         $teacher->update($validatedData);
 
-        return response()->json(['message' => 'teacher account updated successfully!', 'student' => $teacher], 200);
+        return response()->json(['message' => 'teacher account updated successfully!', 'teacher' => $teacher], 200);
     }
 
     
@@ -128,6 +131,23 @@ public function page(Request $r)
        
 		return view('teacher.index');
         //
+    }
+    public function addMoneyToWallet(Request $request, $id)
+    {
+        // Find the student by ID
+        $teacher = Teacher::findOrFail($id);
+    
+        // Validate the request data (you can adjust the validation rules as needed)
+        $validatedData = $request->validate([
+            'amount' => 'required|numeric|min:0', // Assuming you're sending the 'amount' field
+        ]);
+    
+        // Get the student's wallet or create one if it doesn't exist
+        $studentWallet = $teacher->teacher_wallets ?? new teacher_wallets();
+        $studentWallet->value += $validatedData['amount']; // Deposit the specified amount
+        $studentWallet->save();
+    
+        return $studentWallet->value; // Return the updated wallet balance
     }
     
 }
