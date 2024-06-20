@@ -27,8 +27,8 @@ class Teacher extends Authenticatable
     }
 
 //return the wallet of the teacher 
-    public function wallet(){
-        return $this->hasOne(TeacherWallet::class);
+    public function teacher_wallets(){
+        return $this->hasOne(teacher_wallets::class);
     }
 
 }

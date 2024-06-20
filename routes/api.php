@@ -29,6 +29,9 @@ Route::group(['middleware'=>'auth:teacher'],function(){
 Route::put('/students/{id}', [StudentAuthController::class, 'update']);
 Route::put('/teachers/{id}', [TeacherAuthController::class, 'update']);
 
+Route::post('/students/{id}/add-money', [StudentAuthController::class, 'addMoneyToWallet']);
+Route::post('/teachers/{id}/add-money', [TeacherAuthController::class, 'addMoneyToWallet']);
+
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', function(Request $request) {
         // Revoke the token that was used to authenticate the current request
@@ -38,7 +41,10 @@ Route::middleware('auth:sanctum')->group(function () {
         return response()->json(['message' => 'You have been successfully logged out!'], 200);
     });
 });
+Route::post('/students/{studentId}/transfer-to-teacher/{teacherId}', 'StudentWalletController@transferMoneyToTeacher');
 
+Route::get('/students/{studentId}/wallet-value', 'StudentWalletController@getStudentWalletValue');
+Route::get('/teachers/{teacherId}/wallet-value', 'TeacherWalletController@getStudentWalletValue');
 
 Route::get('/test', function() {
     if(auth('teacher')->check() || auth('student')->check() )

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Student;
+use App\Models\student_wallets;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
@@ -74,8 +75,14 @@ class StudentAuthController extends Controller
         $validatedData['password'] = Hash::make($request->password);
 
         $student = Student::create($validatedData);
-
-        return response()->json(['student' => $student], 200);
+        $StudentWallet = new student_wallets(); // Assuming you have a Wallet model
+        $StudentWallet->value = 0; // Initialize the wallet amount (optional)
+        $student->student_wallets()->save($StudentWallet);
+  
+    
+    
+        // Return the student and wallet information
+        return response()->json(['student' => $student, 'StudentWallet' => $StudentWallet], 200);
     }
 
 
@@ -127,4 +134,24 @@ class StudentAuthController extends Controller
 		return view('student.index');
         //
     }
+
+
+    public function addMoneyToWallet(Request $request, $id)
+    {
+        // Find the student by ID
+        $student = Student::findOrFail($id);
+    
+        // Validate the request data (you can adjust the validation rules as needed)
+        $validatedData = $request->validate([
+            'amount' => 'required|numeric|min:0', // Assuming you're sending the 'amount' field
+        ]);
+    
+        // Get the student's wallet or create one if it doesn't exist
+        $studentWallet = $student->student_wallets ?? new student_wallets();
+        $studentWallet->value += $validatedData['amount']; // Deposit the specified amount
+        $studentWallet->save();
+    
+        return $studentWallet->value; // Return the updated wallet balance
+    }
+    
 }

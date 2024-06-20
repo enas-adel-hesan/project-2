@@ -19,9 +19,9 @@ class Student extends Authenticatable
         }
     }
 
-    public function wallet(){
+    public function student_wallets(){
 
-return $this->hasOne(StudentWallet::class);
+return $this->hasOne(student_wallets::class);
 
     }
     public function courses(){

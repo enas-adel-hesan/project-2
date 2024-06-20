@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class StudentWallet extends Model
+class student_wallets extends Model
 {
     use HasFactory;
     protected $fillable=['student_id','value'];
