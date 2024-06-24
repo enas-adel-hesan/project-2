@@ -26,6 +26,10 @@ public function students(){
 public function videos(){
     return $this->hasMany(Video::class);
 }
+public function teacher()
+{
+    return $this->belongsTo(Teacher::class);
+}
 
 
 }
