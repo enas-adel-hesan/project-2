@@ -25,6 +25,10 @@ Route::post('/teacher/register', [TeacherAuthController::class, 'register']);
 Route::group(['middleware'=>'auth:teacher'],function(){
     Route::post('/teacher/add/course', [CourseController::class, 'addCourse'])->name('add_course');
 });
+Route::get('/searchCource/{categoryId}', 'CourseController@searchCoursesbyCategoryId')->name('search');
+
+Route::get('/course/{courseId}', [CourseController::class, 'getInfoCoursebyId']);
+    
 
 Route::put('/students/{id}', [StudentAuthController::class, 'update']);
 Route::put('/teachers/{id}', [TeacherAuthController::class, 'update']);
@@ -41,6 +45,11 @@ Route::middleware('auth:sanctum')->group(function () {
         return response()->json(['message' => 'You have been successfully logged out!'], 200);
     });
 });
+Route::get('/teachers/search', 'TeacherAuthController@searchTeacherByFullName');
+Route::get('/teachers/full-names', 'TeacherAuthController@getAllTeacherFullNames');
+Route::get('/teachers/{teacherId}', 'TeacherAuthController@getInformationTeacherById');
+
+
 Route::post('/students/{studentId}/transfer-to-teacher/{teacherId}', 'StudentWalletController@transferMoneyToTeacher');
 
 Route::get('/students/{studentId}/wallet-value', 'StudentWalletController@getStudentWalletValue');

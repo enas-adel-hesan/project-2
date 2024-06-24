@@ -70,7 +70,10 @@ public function page(Request $r)
             'last_name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:teachers',
             'password' => 'required|string|min:6' ,//image should be added later
-            'specialization'=>'required|string|max:255'
+            'specialization'=>'required|string|max:255',
+            'years_of_experience'=>'required|int',
+            'previous_place_of_work'=>'required|string|max:255'
+
         ]);
 
         $validatedData['password'] = Hash::make($request->password);
@@ -149,7 +152,47 @@ public function page(Request $r)
     
         return $studentWallet->value; // Return the updated wallet balance
     }
+
+        public function searchTeacherByFullName(Request $request)
+    {
+        $fullName = $request->input('full_name');
+
+        $teachers = Teacher::query()
+            ->whereRaw("CONCAT(first_name, ' ', last_name) LIKE ?", ["%$fullName%"])
+            ->select('full_name', 'specialization', 'email') // Select only the desired columns
+            ->get();
+
+        return response()->json(['teachers' => $teachers], 200);
+    }
+
+
+    public function getAllTeacherFullNames()
+    {
+        $teachers = Teacher::select('full_name')->get();
+
+        return response()->json(['teachers' => $teachers], 200);
+    }
+
+
+    public function getInformationTeacherById($teacherId)
+    {
+        $teacher = Teacher::with('courses')->find($teacherId);
+      
+        if (!$teacher) {
+            return response()->json(['error' => 'Teacher not found'], 404);
+        }
+        $name = $teacher->courses->pluck('name');
+        $info = [
+            'full_name' => $teacher->full_name,
+            'specialization' => $teacher->specialization,
+            'email' => $teacher->email,
+            'previous_place_of_work' => $teacher->previous_place_of_work,
+            'years_of_experience' => $teacher->years_of_experience,
+           'course_names' => $name, 
+        ];
     
+        return response()->json(['teacher_info' => $info], 200);
+    }
 }
 
 
