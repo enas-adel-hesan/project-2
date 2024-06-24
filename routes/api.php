@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentAuthController;
 use App\Http\Controllers\TeacherAuthController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\VideoController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -24,6 +26,7 @@ Route::post('/teacher/register', [TeacherAuthController::class, 'register']);
 
 Route::group(['middleware'=>'auth:teacher'],function(){
     Route::post('/teacher/add/course', [CourseController::class, 'addCourse'])->name('add_course');
+    Route::post('/teacher/add/video', [VideoController::class, 'uploadVideo'])->name('add_video');
 });
 
 Route::put('/students/{id}', [StudentAuthController::class, 'update']);
@@ -36,7 +39,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', function(Request $request) {
         // Revoke the token that was used to authenticate the current request
         $request->user()->currentAccessToken()->delete();
-    
+
         // Respond with a JSON message
         return response()->json(['message' => 'You have been successfully logged out!'], 200);
     });
