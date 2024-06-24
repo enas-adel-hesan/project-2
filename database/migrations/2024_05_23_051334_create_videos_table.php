@@ -22,9 +22,6 @@ return new class extends Migration
             $table->string('discription');
             $table->string('file');
             $table->string('thumbnail');
-            $table->date('data');
-            $table->time('time');
-
             $table->timestamps();
         });
     }
