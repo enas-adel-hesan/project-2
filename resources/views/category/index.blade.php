@@ -13,18 +13,14 @@
 }, 3000); //
 		</script>
     @endif
-	<div Style="background-color:white;border-top:solid 3px rgb(0, 17, 255);padding:2%;">
+	<div Style="background-color:white;border-top:solid 3px rgb(15, 128, 20);padding:2%;">
 
 
 <table id="table" class="display">
 <thead>
 <tr>
-<th>first_name</th>
-<th>last_name</th>
-<th>email</th>
-<th>specialization</th>
-<th>previous_place_of_work</th>
-<th>years_of_experience</th>
+<th>name</th>
+
 
 
 
@@ -43,18 +39,14 @@ $(document).ready( function () {
 		processing: true,
 		//serverSide:true,
 		
-		ajax:'pagination-teacher',
-			//url: "{{'pagination-teacher'}}",
+		ajax:'pagination-category',
+			
 			
                 
 		
 	 columns: [
-            {data:'first_name'},
-		   {data:'last_name'},
-			{data:'email'},
-            {data:'specialization'},
-			{data:'previous_place_of_work'},
-			{data:'years_of_experience'},
+            {data:'name'},
+		   
 			
 			 ],
 		

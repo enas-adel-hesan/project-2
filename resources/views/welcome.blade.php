@@ -32,7 +32,7 @@
                         <div class="col-lg-3 col-6">
                             <div class="small-box bg-success">
                                 <div class="inner">
-                                    <h3>20</h3>
+                                    <h3><?php $total_categories = DB::table('categories')->count(); echo $total_categories; ?></h3>
                                     <p>Category </p>
                                 </div>
                                 <div class="icon">
