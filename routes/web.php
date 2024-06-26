@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TeacherAuthController;
 use App\Http\Controllers\StudentAuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\roleController;
 use App\Http\Controllers\usercController;
 
@@ -54,6 +55,9 @@ Route::get('user/{id}/deleted',[userController::class, 'deleted'])->name('delete
     
     Route::get('student', [StudentAuthController::class, 'index']);
     Route::get('pagination-student', [StudentAuthController::class, 'page']);
+
+    Route::get('course', [CourseController::class, 'index']);
+    Route::get('pagination-course', [CourseController::class, 'page']);
 
     Route::get('category', [CategoryController::class, 'index'])->name('category.index');
     Route::get('category/create',[CategoryController::class,'create']);

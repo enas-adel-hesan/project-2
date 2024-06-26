@@ -338,7 +338,7 @@ return [
         [
             'text' => 'Courses',
             'icon_color' => 'orange',
-            'url' => '#',
+            'url' => 'course',
         ],
        
         [
