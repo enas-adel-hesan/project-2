@@ -344,7 +344,7 @@ return [
         [
             'text' => 'Coupouns',
             'icon_color' => 'red',
-            'url' => '#',
+            'url' => 'coupon',
         ],
         
        

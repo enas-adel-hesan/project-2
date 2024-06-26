@@ -5,6 +5,7 @@ use App\Http\Controllers\TeacherAuthController;
 use App\Http\Controllers\StudentAuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\CouponController;
 use App\Http\Controllers\roleController;
 use App\Http\Controllers\usercController;
 
@@ -62,9 +63,13 @@ Route::get('user/{id}/deleted',[userController::class, 'deleted'])->name('delete
     Route::get('category', [CategoryController::class, 'index'])->name('category.index');
     Route::get('category/create',[CategoryController::class,'create']);
     Route::post('category/store', [CategoryController::class, 'store'])->name('category.store');
-    //Route::get('role/{id}/edit', [roleController::class, 'edit'])->name('role.edit');
-    //Route::put('role/{id}/update', [roleController::class, 'update'])->name('role.update');
     Route::get('pagination-category', [CategoryController::class, 'page'])->name('page');
     Route::get('category/{id}/deleted',[CategoryController::class, 'deleted'])->name('deleted');
+
+    Route::get('coupon', [CouponController::class, 'index'])->name('coupon.index');
+    Route::get('coupon/create',[CouponController::class,'create']);
+    Route::post('coupon/store', [CouponController::class, 'store'])->name('coupon.store');
+    Route::get('pagination-coupon', [CouponController::class, 'page'])->name('page');
+    Route::get('coupon/{id}/deleted',[CouponController::class, 'deleted'])->name('deleted');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
