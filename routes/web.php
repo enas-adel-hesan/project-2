@@ -43,8 +43,8 @@ Route::get('role/{id}/deleted',[roleController::class, 'deleted'])->name('delete
 Route::get('user', [userController::class, 'index'])->name('user.index');
 Route::get('user/create',[userController::class,'create']);
 Route::post('user/store', [userController::class, 'store'])->name('user.store');
-Route::get('user/{id}/edit', [userController::class, 'edit'])->name('user.edit');
-Route::put('user/{id}/update', [userController::class, 'update'])->name('user.update');
+//Route::get('user/{id}/edit', [userController::class, 'edit'])->name('user.edit');
+//Route::put('user/{id}/update', [userController::class, 'update'])->name('user.update');
 Route::get('pagination-user', [userController::class, 'page'])->name('page');
 Route::get('user/{id}/deleted',[userController::class, 'deleted'])->name('deleted');
 

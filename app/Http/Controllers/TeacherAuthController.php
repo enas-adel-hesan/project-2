@@ -119,7 +119,10 @@ public function page(Request $r)
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:teachers,email,' . $id,
-             'specialization'=>'required|string|max:255'
+             'specialization'=>'required|string|max:255',
+             'previous_place_of_work'=>'string|max:255',
+             'years_of_experience'=>'string|max:255'
+
             // Exclude password validation and hashing
         ]);
 
