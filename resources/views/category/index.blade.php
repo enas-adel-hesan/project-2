@@ -13,23 +13,19 @@
 }, 3000); //
 		</script>
     @endif
-	<div Style="background-color:white;border-top:solid 3px rgb(0, 17, 255);padding:2%;">
+	<div Style="background-color:white;border-top:solid 3px green;padding:2%;">
+<a class="btn  btn-success" href="category/create" Style="margin-top:0%;margin-left:86%;margin-bottom:2%;">create category</a>
 
-
-<table id="table" class="display">
+<table id="table" class="display my-custom-table">
 <thead>
 <tr>
-<th>first_name</th>
-<th>last_name</th>
-<th>email</th>
-<th>specialization</th>
-<th>previous_place_of_work</th>
-<th>years_of_experience</th>
+<th>name</th>
+
+<th>action</th>
 
 
 </tr>
 </thead>
-
 </table>
 </div>
 @endsection
@@ -37,23 +33,18 @@
 <script>
 
 $(document).ready( function () {
-	//$.fn.dataTable.ext.errMode = 'throw';
     $('#table').DataTable({
-		processing: true,
-		//serverSide:true,
+	//	processing: true,
+	//serverSide:true,
 		
-		ajax:'pagination-teacher',
-			//url: "{{'pagination-teacher'}}",
-			
-                
-		
+		ajax:{
+			url: "{{'pagination-category'}}",
+		},
 	 columns: [
-            {data:'first_name'},
-		   {data:'last_name'},
-			{data:'email'},
-            {data:'specialization'},
-			{data:'previous_place_of_work'},
-			{data:'years_of_experience'},
+            {data:'name'},
+		
+			{data:'action'},
+			
 			 ],
 		
 	})	

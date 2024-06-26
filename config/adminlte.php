@@ -333,7 +333,7 @@ return [
         [
             'text' => 'Category Of Courses',
             'icon_color' => 'green',
-            'url' => '#',
+            'url' => 'category',
         ],
         [
             'text' => 'Courses',
