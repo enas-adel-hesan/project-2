@@ -55,5 +55,9 @@ class CourseController extends Controller
         return response()->json(['course' => $formattedCourse]);
     }
     
-
-}
+        public function getAllCourses()
+        {  $courses =  Course::select('name')->get();
+            return response()->json(['courses' => $courses], 200);
+           
+        }
+    }

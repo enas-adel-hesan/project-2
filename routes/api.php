@@ -6,7 +6,7 @@ use App\Http\Controllers\StudentAuthController;
 use App\Http\Controllers\TeacherAuthController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\VideoController;
-
+use App\Http\Controllers\StudentCourseController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -32,12 +32,17 @@ Route::get('/searchCource/{categoryId}', 'CourseController@searchCoursesbyCatego
 
 Route::get('/course/{courseId}', [CourseController::class, 'getInfoCoursebyId']);
     
-
+Route::get('/courses', [CourseController::class, 'getAllCourses']);
+    
 Route::put('/students/{id}', [StudentAuthController::class, 'update']);
 Route::put('/teachers/{id}', [TeacherAuthController::class, 'update']);
 
 Route::post('/students/{id}/add-money', [StudentAuthController::class, 'addMoneyToWallet']);
 Route::post('/teachers/{id}/add-money', [TeacherAuthController::class, 'addMoneyToWallet']);
+
+
+Route::post('/courses/{studentId}/{courseId}/subscribe', [StudentCourseController::class, 'subscribeToCourse']);
+
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', function(Request $request) {
