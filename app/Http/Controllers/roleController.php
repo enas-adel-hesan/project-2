@@ -41,7 +41,7 @@ class roleController extends Controller
             $arr[] = array(
                 'name' => $d->name,
                 'action' => "
-                    <a href='role/{$d->id}/edit' class='btn btn-success'><i class='fas fa-edit'></i> Edit</a>
+                   
                     <a href='role/{$d->id}/deleted' class='btn btn-danger'><i class='fas fa-trash'></i> Delete</a>
                 "
             );

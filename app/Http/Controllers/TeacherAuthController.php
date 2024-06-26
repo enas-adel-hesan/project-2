@@ -40,6 +40,8 @@ public function page(Request $r)
             'last_name' => $d->last_name,
             'email' => $d->email,
             'specialization' => $d->specialization,
+            'previous_place_of_work' => $d->previous_place_of_work,
+            'years_of_experience' => $d->years_of_experience,
         );
     }
 
