@@ -338,13 +338,13 @@ return [
         [
             'text' => 'Courses',
             'icon_color' => 'orange',
-            'url' => '#',
+            'url' => 'course',
         ],
        
         [
             'text' => 'Coupouns',
             'icon_color' => 'red',
-            'url' => '#',
+            'url' => 'coupon',
         ],
         
        

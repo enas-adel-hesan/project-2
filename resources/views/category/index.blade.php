@@ -13,20 +13,19 @@
 }, 3000); //
 		</script>
     @endif
-	<div Style="background-color:white;border-top:solid 3px rgb(15, 128, 20);padding:2%;">
+	<div Style="background-color:white;border-top:solid 3px green;padding:2%;">
+<a class="btn  btn-success" href="category/create" Style="margin-top:0%;margin-left:86%;margin-bottom:2%;">create category</a>
 
-
-<table id="table" class="display">
+<table id="table" class="display my-custom-table">
 <thead>
 <tr>
 <th>name</th>
 
-
+<th>action</th>
 
 
 </tr>
 </thead>
-
 </table>
 </div>
 @endsection
@@ -34,19 +33,17 @@
 <script>
 
 $(document).ready( function () {
-	//$.fn.dataTable.ext.errMode = 'throw';
     $('#table').DataTable({
-		processing: true,
-		//serverSide:true,
+	//	processing: true,
+	//serverSide:true,
 		
-		ajax:'pagination-category',
-			
-			
-                
-		
+		ajax:{
+			url: "{{'pagination-category'}}",
+		},
 	 columns: [
             {data:'name'},
-		   
+		
+			{data:'action'},
 			
 			 ],
 		
