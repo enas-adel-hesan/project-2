@@ -17,6 +17,7 @@ use App\Http\Controllers\StudentCourseController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::get("category","API\\CategoryController@index");
 
 Route::post('/student/login', [StudentAuthController::class, 'login']);
 Route::post('/student/register', [StudentAuthController::class, 'register']);
