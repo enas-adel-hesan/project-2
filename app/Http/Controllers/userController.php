@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use DB;
 use File;
 use Hash;
-class userController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.

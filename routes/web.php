@@ -7,7 +7,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\roleController;
-use App\Http\Controllers\usercController;
+use App\Http\Controllers\UsercController;
 
 
 
@@ -38,15 +38,9 @@ Route::post('role/store', [roleController::class, 'store'])->name('role.store');
 Route::get('pagination-role', [roleController::class, 'page'])->name('page');
 Route::get('role/{id}/deleted',[roleController::class, 'deleted'])->name('deleted');
 
+Route::get('user',[UserController::class,'index']);
 
     
-Route::get('user', [userController::class, 'index'])->name('user.index');
-Route::get('user/create',[userController::class,'create']);
-Route::post('user/store', [userController::class, 'store'])->name('user.store');
-//Route::get('user/{id}/edit', [userController::class, 'edit'])->name('user.edit');
-//Route::put('user/{id}/update', [userController::class, 'update'])->name('user.update');
-Route::get('pagination-user', [userController::class, 'page'])->name('page');
-Route::get('user/{id}/deleted',[userController::class, 'deleted'])->name('deleted');
 
 
    
